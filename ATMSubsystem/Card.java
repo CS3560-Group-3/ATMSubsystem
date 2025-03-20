@@ -34,4 +34,8 @@ public class Card {
     public Date getExpiryDate() {
         return this.expiryDate;
     }
+
+    public int checkPin() {
+        return this.pin;
+    }
 }
