@@ -30,6 +30,8 @@ public class App extends Application {
     }
 
     public static final IntegerProperty balance = new SimpleIntegerProperty(0);
+    public static final IntegerProperty savingsBalance = new SimpleIntegerProperty(0);
+
 
    
 
