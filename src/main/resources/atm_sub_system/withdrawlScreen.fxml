@@ -6,8 +6,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TextField?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm_sub_system.withdrawlScreenController">
-   <Label fx:id = "insertAmountWithdrawlLabel" text = "Insert withdrawl amount please." />
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm_sub_system.withdrawlScreenController"
+style = "-fx-background-color: green;">
+   <Label fx:id = "insertAmountWithdrawlLabel" text = "Insert withdrawl amount please." style ="-fx-text-fill: yellow; -fx-font-weight: bold;" />
     <TextField fx:id = "withdrawlAmountTextField" promptText = "enter here" />
     <Button fx:id = "withdrawlButtonOnDepostiScreen"  text = "withdrawl" onAction = "#withdrawl" />
     <Button fx:id = "toSecondary" onAction ="#switchToSecondary" text = "back"/>

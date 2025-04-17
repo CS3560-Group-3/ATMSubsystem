@@ -8,14 +8,14 @@
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm_sub_system.accountBalanceScreenController"
  style = "-fx-background-color: green;" >
 
-    <Label fx:id="checkingsLabel" text = "Checkings" style="-fx-text-fill: yellow;"/>
+    <Label fx:id="checkingsLabel" text = "Checkings" style="-fx-text-fill: yellow; -fx-font-weight: bold;"/>
 
 
     <VBox fx:id="checkingsVBox" style = "-fx-background-color: white;" prefHeight ="50" prefWidth="50">
         <Label fx:id="currentBalanceLabel" />
     </VBox>
 
-    <Label fx:id="savingsLabel" text = "Savings" style="-fx-text-fill: yellow;"/>
+    <Label fx:id="savingsLabel" text = "Savings" style="-fx-text-fill: yellow; -fx-font-weight: bold;"/>
 
     <VBox fx:id="savingsVBox" style = "-fx-background-color: white;" prefHeight ="50" prefWidth="50">
         <Label fx:id="currentSavingsBalanceLabel" />

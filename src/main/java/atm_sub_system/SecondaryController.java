@@ -24,7 +24,11 @@ public class SecondaryController {
     private void switchToWithdrawlScreen() throws IOException {
         App.setRoot("withdrawlScreen");
     }
-
+    @FXML
+    private void switchToTransferFundsScreen() throws IOException {
+        App.setRoot("transferFundsScreen");
+    }
+    
     
 
 }
