@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.io.IOException;
@@ -32,8 +34,9 @@ public class App extends Application {
     public static final IntegerProperty balance = new SimpleIntegerProperty(0);
     public static final IntegerProperty savingsBalance = new SimpleIntegerProperty(0);
 
-
-   
+    public static final DoubleProperty cashBalance = new SimpleDoubleProperty(0.0);
+    public static final IntegerProperty sessionAccountId = new SimpleIntegerProperty(-1);
+    public static final IntegerProperty sessionCustomerId = new SimpleIntegerProperty(-1);
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
