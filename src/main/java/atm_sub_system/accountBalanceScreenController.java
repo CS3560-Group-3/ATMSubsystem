@@ -1,9 +1,7 @@
 package atm_sub_system;
 import java.io.IOException;
-import java.util.ResourceBundle;
 import javafx.scene.control.Label;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 
 public class accountBalanceScreenController {
     @FXML
