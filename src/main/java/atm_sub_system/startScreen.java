@@ -16,36 +16,35 @@ public class startScreen {
     private String password = "root"; 
 
     @FXML
-    private TextField accountNumberInput;
+    private TextField cardNumberInput;
 
     @FXML
     private PasswordField pinInput;
 
     private void showNotFoundAlert() {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Error");
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Log On Failed");
         alert.setHeaderText("Log On Failed");
-        alert.setContentText("Account number and pin combination not found. Please try again.");
+        alert.setContentText("Card number and PIN combination not found in our records. Please try again.");
         alert.showAndWait();
     }
 
     @FXML
     private void logOn() throws IOException {
 
-        String accountNumber = accountNumberInput.getText();
+        String cardNumber = cardNumberInput.getText();
         String pinCode = pinInput.getText();
 
-        if(accountNumber == "" || pinCode == "") {
+        if(cardNumber == "" || pinCode == "") {
             showNotFoundAlert();
         } else {
             try (Connection conn = DriverManager.getConnection(url, user, password)) {
-                String query = String.format("SELECT * FROM accounts JOIN customers ON (accounts.customerId = customers.customerId) WHERE accountNumber=%d AND pinCode=%d", Integer.parseInt(accountNumber), Integer.parseInt(pinCode));
+                String query = String.format("SELECT * FROM debitcards JOIN customers ON (debitcards.customerId = customers.customerId) WHERE cardNumber=%s AND pinCode=%d", cardNumber, Integer.parseInt(pinCode));
                 try (Statement stmt = conn.createStatement();
                     ResultSet rs = stmt.executeQuery(query)) {
     
                     int resultCount = 0;
                     while (rs.next()) {
-                        App.sessionAccountId.set(rs.getInt("accountId"));
                         App.sessionCustomerId.set(rs.getInt("customerId"));
                         App.setRoot("secondary");
                         resultCount++;

@@ -5,16 +5,16 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm_sub_system.SecondaryController"
-style = "-fx-background-color: green;">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm_sub_system.secondaryController" style = "-fx-background-color: #1d4231;">
     <children>
-        <Button fx:id="depositButton" text="deposit" onAction = "#switchToDepositScreen" />
-        <Button fx:id="withdrawlButton" text="withdrawl"  onAction = "#switchToWithdrawlScreen"/>
-        <Button fx:id="transFerFundsButton" text="transfer funds" onAction = "#switchToTransferFundsScreen" />
+        <Label fx:id="welcomeLabel" text = "Loading..." style ="-fx-text-fill: #f8ae1b; -fx-font-weight: bold;" />
+        <Button fx:id="depositButton" text="Deposit Funds" onAction = "#switchToDepositScreen" />
+        <Button fx:id="withdrawlButton" text="Withdraw Funds"  onAction = "#switchToWithdrawlScreen"/>
+        <Button fx:id="transFerFundsButton" text="Transer Funds" onAction = "#switchToTransferFundsScreen" />
 
-        <Button fx:id="viewAccountBalanceButton" text="View account balance" onAction="#switchToAccountBalanceScreen" />
+        <Button fx:id="viewAccountBalanceButton" text="View Account Balance" onAction="#switchToAccountBalanceScreen" />
         
-        <Button fx:id="secondaryButton" text="back to main screen" onAction="#switchToPrimary" />
+        <Button fx:id="secondaryButton" text="Log Out" onAction="#logOut" />
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
