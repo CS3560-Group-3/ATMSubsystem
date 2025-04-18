@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="atm_sub_system.accountBalanceItemController" spacing="0" alignment="CENTER_LEFT" style="-fx-border-color: #f8ae1b; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 5px; -fx-background-color: white;">
+          <children>
+                    <Label fx:id="accountInfoHeader" text = "Loading.." style ="-fx-text-fill: #f8ae1b; -fx-font-size: 12px;" />
+                    <Label fx:id="accountBalance" text = "Loading..." style ="-fx-text-fill: #f8ae1b; -fx-font-weight: bold; -fx-font-size: 25px;" />
+          </children>
+</VBox>

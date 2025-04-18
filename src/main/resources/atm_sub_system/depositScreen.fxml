@@ -10,10 +10,13 @@
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm_sub_system.depositScreenController" style = "-fx-background-color: #1d4231;">
     <Label fx:id = "selectAccountLabel" text = "Please select the account to deposit into." style ="-fx-text-fill: #f8ae1b; -fx-font-weight: bold;" />
     <ComboBox fx:id="accountSelectDropdown" prefWidth="200" />
-    <Label fx:id = "insertAmountDepositLabel" text = "Please insert deposit amount." style ="-fx-text-fill: #f8ae1b; -fx-font-weight: bold;" />
-    <TextField fx:id = "depositAmountTextField" promptText = "Enter deposit amount" prefWidth="100" />
-    <Button fx:id = "depositButton"  text = "Deposit" onAction = "#deposit" />
-    <Button fx:id = "toSecondary" onAction ="#switchToSecondary" text = "Back to Menu"/>
+    
+    <Label fx:id = "insertAmountDepositLabel" text = "Please insert deposit amount." style ="-fx-text-fill: #f8ae1b; -fx-font-weight: bold;" visible="false" />
+    <TextField fx:id = "depositAmountTextField" promptText = "Enter deposit amount" prefWidth="100" visible="false" style="-fx-border-color: #f8ae1b; -fx-max-width: 250px; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 5px;" />
+    
+    <Button fx:id = "depositButton"  text = "Deposit" onAction = "#deposit" visible="false" style="-fx-background-color: #f8ae1b; -fx-pref-width: 250px; -fx-background-radius: 5px; -fx-padding: 10px;" />
+    <Button fx:id = "toSecondary" onAction ="#switchToSecondary" text = "Back to Menu" style="-fx-background-color: #3e8e69; -fx-text-fill: white; -fx-pref-width: 250px; -fx-background-radius: 5px; -fx-padding: 10px;"/>
+
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>

@@ -12,10 +12,6 @@ import javafx.scene.control.Label;
 
 public class secondaryController {
 
-    private String url = "jdbc:mysql://localhost:3306/atmsubsystem";
-    private String user = "root"; 
-    private String password = "root"; 
-
     @FXML
     private Label welcomeLabel;
 
@@ -24,7 +20,7 @@ public class secondaryController {
         if(App.sessionCustomerId.get() == -1) {
             App.setRoot("startScreen");
         } else {
-            try (Connection conn = DriverManager.getConnection(url, user, password)) {
+            try (Connection conn = DriverManager.getConnection(App.db_url, App.db_user, App.db_password)) {
                 String query = String.format("SELECT * FROM customers WHERE customerId=%d", App.sessionCustomerId.get());
                 try (Statement stmt = conn.createStatement();
                     ResultSet rs = stmt.executeQuery(query)) {
@@ -58,7 +54,7 @@ public class secondaryController {
 
     @FXML
     private void switchToWithdrawlScreen() throws IOException {
-        App.setRoot("withdrawlScreen");
+        App.setRoot("withdrawScreen");
     }
     @FXML
     private void switchToTransferFundsScreen() throws IOException {

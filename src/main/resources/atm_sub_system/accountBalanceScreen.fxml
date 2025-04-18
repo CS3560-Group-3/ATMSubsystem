@@ -7,21 +7,15 @@
 
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm_sub_system.accountBalanceScreenController" style = "-fx-background-color: #1d4231;" >
 
-    <Label fx:id="checkingsLabel" text = "Checkings" style="-fx-text-fill: #f8ae1b; -fx-font-weight: bold;"/>
-
-
-    <VBox fx:id="checkingsVBox" style = "-fx-background-color: white;" prefHeight ="50" prefWidth="50">
-        <Label fx:id="currentBalanceLabel" />
+    <VBox fx:id="accountsList"
+        spacing="10"
+        xmlns:fx="http://javafx.com/fxml">
     </VBox>
 
-    <Label fx:id="savingsLabel" text = "Savings" style="-fx-text-fill: #f8ae1b; -fx-font-weight: bold;"/>
-
-    <VBox fx:id="savingsVBox" style = "-fx-background-color: white;" prefHeight ="50" prefWidth="50">
-        <Label fx:id="currentSavingsBalanceLabel" />
-    </VBox>
-
-    <VBox fx:id="savingsVBox" />
-
-    <Button onAction="#switchToSecondary" text="back" />
+    <Button fx:id = "toSecondary" onAction ="#switchToSecondary" text = "Back to Menu" style="-fx-background-color: #3e8e69; -fx-text-fill: white; -fx-pref-width: 250px; -fx-background-radius: 5px; -fx-padding: 10px;"/>
     
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
 </VBox>
