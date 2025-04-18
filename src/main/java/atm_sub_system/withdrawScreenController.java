@@ -18,8 +18,10 @@ import javafx.fxml.FXML;
 
 public class withdrawScreenController {
 
+    // Define variable to store the account which the user select to deposit into
     private int selectedAccount = -1;
 
+    // Define FXML elements to update values / visiblity / fetch values later on
     @FXML
     private Label insertAmountWithdrawLabel;
 
@@ -32,6 +34,7 @@ public class withdrawScreenController {
     @FXML
     private ComboBox<AccountOption> accountSelectDropdown;
 
+    // Display withdraw success alert to user
     private void showWithdrawSuccess() {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Withdraw Successful");
@@ -41,6 +44,7 @@ public class withdrawScreenController {
         alert.showAndWait();
     }
 
+    // Display insufficient balance alert to user
     private void showInsufficientBalance() {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Insufficient Balance");
@@ -50,6 +54,7 @@ public class withdrawScreenController {
         alert.showAndWait();
     }
 
+    // Display withdraw fail alert to user
     private void showWithdrawFail() {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Withdraw Failed");
@@ -60,6 +65,7 @@ public class withdrawScreenController {
     }
 
     public void initialize() {
+        // Connect to DB and fetch list of customer accounts on page load to populate account list dropdown
         ObservableList<AccountOption> accounts = FXCollections.observableArrayList();
         try (Connection conn = DriverManager.getConnection(App.db_url, App.db_user, App.db_password)) {
             String query = String.format("SELECT * FROM accounts WHERE customerId=%d", App.sessionCustomerId.get());
@@ -67,6 +73,7 @@ public class withdrawScreenController {
                 ResultSet rs = stmt.executeQuery(query)) {
 
                 while (rs.next()) {
+                    // Add each account and it's ID to the account select dropdown
                     accounts.add(new AccountOption(rs.getInt("accountId"), String.format("Account #%s (%s)", rs.getString("accountNumber"), App.capitalizeFirst(rs.getString("type")))));
                 }
 
@@ -74,9 +81,13 @@ public class withdrawScreenController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        // Set the account select dropdown items
         accountSelectDropdown.setItems(accounts);
+        // Reigster callback function on account selection
         accountSelectDropdown.setOnAction(event -> {
+            // Set selected account value
             selectedAccount = accountSelectDropdown.getValue().getId();
+            // Reveal hidden entry fields & clear input values
             insertAmountWithdrawLabel.setVisible(true);
             withdrawAmountTextField.setVisible(true);
             withdrawAmountTextField.clear();
@@ -86,17 +97,22 @@ public class withdrawScreenController {
 
     @FXML
     private void withdraw() throws IOException {
+        // Get input value from withdraw amount text field
         String input = withdrawAmountTextField.getText();
 
         try {
+            // Validate input is a double
             double withdrawAmount = Double.parseDouble(input);
+            // Define variable to store the current account balance
             double currentBalance = -1.0;
 
+            // Connect to DB and fetch the account balance for the selected account
             try (Connection conn = DriverManager.getConnection(App.db_url, App.db_user, App.db_password)) {
                 String query = String.format("SELECT balance FROM accounts WHERE accountId=%d", selectedAccount);
                 try (Statement stmt = conn.createStatement();
                     ResultSet rs = stmt.executeQuery(query)) {
                     while (rs.next()) {
+                        // Set the current balance variable to the current balance of the selected account
                         currentBalance = rs.getDouble("balance");
                     }
                 }
@@ -104,14 +120,21 @@ public class withdrawScreenController {
                 e.printStackTrace();
             }
 
+            // Validate that the selected account has sufficent balance to fund the transaction
             if(currentBalance == -1 || withdrawAmount > currentBalance) {
+                // If not, clear the input field and display error alert to user
                 withdrawAmountTextField.clear();
                 showInsufficientBalance();
             } else {
+                // If true, withdraw the money from the selected account
+
+                // Connect to DB and withdraw money from the selected account
                 try (Connection conn = DriverManager.getConnection(App.db_url, App.db_user, App.db_password)) {
                     String query = String.format("UPDATE accounts SET balance = balance - %f WHERE accountId = %d", withdrawAmount, selectedAccount);
+                    // Perform update and track number of rows affected
                     try (Statement stmt = conn.createStatement()) {
                         int affected = stmt.executeUpdate(query);
+                        // If withdraw successful, display success alert and redirect to menu
                         if(affected > 0) {
                             showWithdrawSuccess();
                             App.setRoot("secondary");
@@ -119,18 +142,21 @@ public class withdrawScreenController {
         
                     }
                 } catch (SQLException e) {
+                    // Display withdraw failed alert
                     showWithdrawFail();
                     e.printStackTrace();
                 }
             }
 
         } catch (NumberFormatException e){
+            // Display invalid amount alert to user
             insertAmountWithdrawLabel.setText("Invalid amount!");
         }
     }
 
     @FXML
     private void switchToSecondary() throws IOException {
+        // Redirect user home
         App.setRoot("secondary");
     }
 

@@ -1,25 +1,34 @@
 package atm_sub_system;
 
 public class AccountOption {
+
+          /*
+           * This class is used to display the list of user accounts as "Account #XXXX (Type)" while storing the account ID with a JavaFX ComboBox.
+           */
+
           private final int id;
           private final String displayText;
 
+          // Initialize values
           public AccountOption(int id, String displayText) {
                     this.id = id;
                     this.displayText = displayText;
           }
 
+          // Get Account ID value
           public int getId() {
-                    return id;
+            return id;
           }
 
+          // Get display text value
           public String getDisplayText() {
-                    return displayText;
+            return displayText;
           }
 
           @Override
           public String toString() {
-                    return displayText;
+            // Convert to string
+            return displayText;
           }
       }
       
