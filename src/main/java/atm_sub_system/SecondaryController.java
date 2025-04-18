@@ -10,7 +10,7 @@ import java.sql.Statement;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class secondaryController {
+public class SecondaryController {
 
     private String url = "jdbc:mysql://localhost:3306/atmsubsystem";
     private String user = "root"; 
