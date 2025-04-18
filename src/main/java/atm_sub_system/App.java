@@ -23,16 +23,22 @@ import java.sql.Statement;
  */
 public class App extends Application {
 
-    private static String url = "jdbc:mysql://localhost:3306/atmsubsystem";
-    private static String user = "root"; 
-    private static String password = "root"; 
+    public static String db_url = "jdbc:mysql://localhost:3306/atmsubsystem";
+    public static String db_user = "root"; 
+    public static String db_password = "root"; 
+
+    @SuppressWarnings("exports")
+    public static final DoubleProperty cashBalance = new SimpleDoubleProperty(0.0);
+    @SuppressWarnings("exports")
+    public static final IntegerProperty sessionCustomerId = new SimpleIntegerProperty(-1);
 
     private static Scene scene;
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
         scene = new Scene(loadFXML("startScreen"), 640, 480);
         stage.setScene(scene);
+        stage.setTitle("CalPoly Credit Union ATM");
         stage.show();
     }
 
@@ -40,11 +46,9 @@ public class App extends Application {
         scene.setRoot(loadFXML(fxml));
     }
 
-    public static final IntegerProperty balance = new SimpleIntegerProperty(0);
-    public static final IntegerProperty savingsBalance = new SimpleIntegerProperty(0);
-
-    public static final DoubleProperty cashBalance = new SimpleDoubleProperty(0.0);
-    public static final IntegerProperty sessionCustomerId = new SimpleIntegerProperty(-1);
+    public static String capitalizeFirst(String input) {
+        return input.substring(0, 1).toUpperCase() + input.substring(1);
+    }
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
@@ -53,7 +57,7 @@ public class App extends Application {
 
     public static void main(String[] args) {
 
-        try (Connection conn = DriverManager.getConnection(url, user, password)) {
+        try (Connection conn = DriverManager.getConnection(db_url, db_user, db_password)) {
             try (Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT * FROM atms WHERE atmId=1")) {
                 while (rs.next()) {

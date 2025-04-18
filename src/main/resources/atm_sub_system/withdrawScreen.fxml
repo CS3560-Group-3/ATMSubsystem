@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm_sub_system.withdrawScreenController" style = "-fx-background-color: #1d4231;">
+    <Label fx:id = "selectAccountLabel" text = "Please select the account to withdraw from." style ="-fx-text-fill: #f8ae1b; -fx-font-weight: bold;" />
+    <ComboBox fx:id="accountSelectDropdown" prefWidth="200" />
+
+    <Label fx:id = "insertAmountWithdrawLabel" text = "Please insert withdraw amount." style ="-fx-text-fill: #f8ae1b; -fx-font-weight: bold;" visible="false" />
+    <TextField fx:id = "withdrawAmountTextField" promptText = "Enter withdraw amount" prefWidth="100" visible="false" style="-fx-border-color: #f8ae1b; -fx-max-width: 250px; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 5px;" />
+    
+    <Button fx:id = "withdrawButton"  text = "Withdraw" onAction = "#withdraw" visible="false" style="-fx-background-color: #f8ae1b; -fx-pref-width: 250px; -fx-background-radius: 5px; -fx-padding: 10px;" />
+    <Button fx:id = "toSecondary" onAction ="#switchToSecondary" text = "Back to Menu" style="-fx-background-color: #3e8e69; -fx-text-fill: white; -fx-pref-width: 250px; -fx-background-radius: 5px; -fx-padding: 10px;"/>
+
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+</VBox>

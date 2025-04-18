@@ -11,10 +11,6 @@ import java.sql.*;
 
 public class startScreen {
 
-    private String url = "jdbc:mysql://localhost:3306/atmsubsystem";
-    private String user = "root"; 
-    private String password = "root"; 
-
     @FXML
     private TextField cardNumberInput;
 
@@ -26,6 +22,7 @@ public class startScreen {
         alert.setTitle("Log On Failed");
         alert.setHeaderText("Log On Failed");
         alert.setContentText("Card number and PIN combination not found in our records. Please try again.");
+        alert.getDialogPane().setPrefSize(400, 200);
         alert.showAndWait();
     }
 
@@ -38,7 +35,7 @@ public class startScreen {
         if(cardNumber == "" || pinCode == "") {
             showNotFoundAlert();
         } else {
-            try (Connection conn = DriverManager.getConnection(url, user, password)) {
+            try (Connection conn = DriverManager.getConnection(App.db_url, App.db_user, App.db_password)) {
                 String query = String.format("SELECT * FROM debitcards JOIN customers ON (debitcards.customerId = customers.customerId) WHERE cardNumber=%s AND pinCode=%d", cardNumber, Integer.parseInt(pinCode));
                 try (Statement stmt = conn.createStatement();
                     ResultSet rs = stmt.executeQuery(query)) {
