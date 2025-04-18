@@ -1,0 +1,6 @@
+# Ignore Maven target directory
+target/
+
+# Ignore IDE directories
+.vscode/
+.idea/
