@@ -36,7 +36,7 @@ public class withdrawScreenController {
 
     // Display withdraw success alert to user
     private void showWithdrawSuccess() {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
+        Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Withdraw Successful");
         alert.setHeaderText("Withdraw Successful");
         alert.setContentText("The specified amount of money was withdrawn from your account.");
@@ -122,7 +122,7 @@ public class withdrawScreenController {
 
             // Validate that the selected account has sufficent balance to fund the transaction
             if(currentBalance == -1 || withdrawAmount > currentBalance) {
-                // If not, clear the input field and display error alert to user
+                // If false, clear the input field and display error alert to user
                 withdrawAmountTextField.clear();
                 showInsufficientBalance();
             } else {
