@@ -18,7 +18,7 @@
         
         <Button fx:id="depositButton" text="Deposit Funds" onAction = "#switchToDepositScreen" style="-fx-background-color: #f8ae1b; -fx-pref-width: 250px; -fx-background-radius: 5px; -fx-padding: 10px;" />
         <Button fx:id="withdrawlButton" text="Withdraw Funds"  onAction = "#switchToWithdrawlScreen" style="-fx-background-color: #f8ae1b; -fx-pref-width: 250px; -fx-background-radius: 5px; -fx-padding: 10px;" />
-        <Button fx:id="transFerFundsButton" text="Transer Funds" onAction = "#switchToTransferFundsScreen" style="-fx-background-color: #f8ae1b; -fx-pref-width: 250px; -fx-background-radius: 5px; -fx-padding: 10px;" />
+        <Button fx:id="transFerFundsButton" text="Transfer Funds" onAction = "#switchToTransferFundsScreen" style="-fx-background-color: #f8ae1b; -fx-pref-width: 250px; -fx-background-radius: 5px; -fx-padding: 10px;" />
         <Button fx:id="viewAccountBalanceButton" text="View Account Balance" onAction="#switchToAccountBalanceScreen" style="-fx-background-color: #f8ae1b; -fx-pref-width: 250px; -fx-background-radius: 5px; -fx-padding: 10px;" />
         
         <Button fx:id="secondaryButton" text="Log Out" onAction="#logOut" style="-fx-background-color: #ff4c4c; -fx-text-fill: white; -fx-pref-width: 250px; -fx-background-radius: 5px; -fx-padding: 10px;" />
