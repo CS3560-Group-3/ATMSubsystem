@@ -69,4 +69,9 @@ public class startScreen {
 
     }
 
+    @FXML
+    private void createAccount() throws IOException {
+        App.setRoot("createAccount");
+    }
+
 }

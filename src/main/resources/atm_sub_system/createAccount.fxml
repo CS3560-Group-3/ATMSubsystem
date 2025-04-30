@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<VBox alignment="TOP_LEFT" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm_sub_system.createAccount" style = "-fx-background-color: #1d4231;">
+   <children>
+      <ImageView fitWidth="300" preserveRatio="true">
+         <image>
+               <Image url="@/logo.png" />
+         </image>
+      </ImageView>
+      
+      <VBox spacing="0" alignment="CENTER_LEFT">
+         <Label text="Create Account" style="-fx-text-fill: #f8ae1b; -fx-font-weight: bold; -fx-font-size: 25px; -fx-margin: 0px;" />
+         <Label text="Enter your details to create a new account" style="-fx-text-fill: #f8ae1b; -fx-font-weight: bold; -fx-font-size: 15px; -fx-margin: 0px;" />
+         <VBox.margin>
+               <Insets bottom="10" top="10" />
+         </VBox.margin>
+      </VBox>
+
+      <HBox spacing="10" alignment="CENTER_LEFT">
+         <TextField fx:id="firstNameLabel" promptText="First Name" style="-fx-border-color: #f8ae1b; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 5px; -fx-pref-width: 200px;" HBox.hgrow="ALWAYS" />
+         <TextField fx:id="lastNameLabel" promptText="Last Name" style="-fx-border-color: #f8ae1b; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 5px; -fx-pref-width: 200px;" HBox.hgrow="ALWAYS" />
+      </HBox>
+
+      <TextField fx:id="phoneNumberLabel" promptText="Phone Number (xxx-xxx-xxxx)" style="-fx-border-color: #f8ae1b; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 5px;" />
+      <TextField fx:id="emailAddressLabel" promptText="Email" style="-fx-border-color: #f8ae1b; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 5px;" />
+      <TextField fx:id="ssnLabel" promptText="SSN (xxxxxxxxx)" style="-fx-border-color: #f8ae1b; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 5px;" />
+      
+      <TextField fx:id="streetAddressLabel" promptText="Street Address" style="-fx-border-color: #f8ae1b; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 5px;" />
+      
+      <HBox spacing="10" alignment="CENTER_LEFT">
+         <TextField fx:id="cityLabel" promptText="City" style="-fx-border-color: #f8ae1b; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 5px; -fx-pref-width: 180px;" HBox.hgrow="ALWAYS" />
+         <TextField fx:id="stateLabel" promptText="State Abbreviation" style="-fx-border-color: #f8ae1b; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 5px; -fx-pref-width: 100px;" HBox.hgrow="ALWAYS" />
+         <TextField fx:id="zipCodeLabel" promptText="Zip Code" style="-fx-border-color: #f8ae1b; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 5px; -fx-pref-width: 120px;" HBox.hgrow="ALWAYS" />
+      </HBox>
+
+      <PasswordField fx:id="pinLabel" promptText="PIN" style="-fx-border-color: #f8ae1b; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 5px;" />
+      <PasswordField fx:id="confirmPinLabel" promptText="Confirm PIN" style="-fx-border-color: #f8ae1b; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 5px;" />
+
+      <CheckBox fx:id="createSavingsCheckbox" text="Create savings account?" style="-fx-text-fill: #f8ae1b; -fx-font-weight: bold; -fx-font-size: 14px;" selected="false">
+         <VBox.margin>
+               <Insets top="10" bottom="10" />
+         </VBox.margin>
+      </CheckBox>
+
+      <HBox spacing="10" alignment="CENTER_LEFT">
+         <Button fx:id="createButton" text="Create Account" onAction="#createNewAccount" style="-fx-background-color: #f8ae1b; -fx-font-weight: bold; -fx-pref-width: 150px; -fx-background-radius: 5px; -fx-padding: 5px;"/>
+         <Button fx:id="backButton" text="Back" onAction="#goBack" style="-fx-background-color: #f8ae1b; -fx-font-weight: bold; -fx-pref-width: 80px; -fx-background-radius: 5px; -fx-padding: 5px;"/>
+      </HBox>
+
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

@@ -30,6 +30,7 @@
       <PasswordField fx:id="pinInput" promptText = "Enter PIN" style="-fx-border-color: #f8ae1b; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 5px;" />
       
       <Button fx:id="logOnButton" text="Log On" onAction="#logOn" style="-fx-background-color: #f8ae1b; -fx-font-weight: bold; -fx-pref-width: 200px; -fx-background-radius: 5px; -fx-padding: 5px;"/>
+      <Button fx:id="createAccountButton" text="Create Account" onAction="#createAccount" style="-fx-background-color: #f8ae1b; -fx-font-weight: bold; -fx-pref-width: 200px; -fx-background-radius: 5px; -fx-padding: 5px;"/>
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
