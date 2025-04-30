@@ -49,7 +49,7 @@ public class transferFundsScreenController {
 
     // Display transfer success alert to user
     private void showTransferSuccess() {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
+        Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Transfer Successful");
         alert.setHeaderText("Transfer Successful");
         alert.setContentText("Money has been successfully transferred from your selected account to the destination account.");
@@ -63,6 +63,16 @@ public class transferFundsScreenController {
         alert.setTitle("Transfer Failed");
         alert.setHeaderText("Transfer Failed");
         alert.setContentText("Transfer failed. Please double check destination account and amount and try again.");
+        alert.getDialogPane().setPrefSize(400, 200);
+        alert.showAndWait();
+    }
+
+    // Display insufficient balance alert to user
+    private void showInsufficientBalance() {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Insufficient Balance");
+        alert.setHeaderText("Insufficient Balance");
+        alert.setContentText("You do not have a sufficient account balance to fund that transaction.");
         alert.getDialogPane().setPrefSize(400, 200);
         alert.showAndWait();
     }
@@ -133,46 +143,70 @@ public class transferFundsScreenController {
                     // If not, display error alert
                     showInvalidDestination();
                 } else {
-                    // If destination account exists, process transfer transaction
+                    // If destination account exists, check source account balance
 
-                    // Define variables to store the amount of source & destination rows affected
-                    int sourceAffected = 0;
-                    int destinationAffected = 0;
-                    
-                    // Connect to DB and update source account to debit transfer amount from
+                    // Define variable to store the current account balance
+                    double currentBalance = -1.0;
+
+                    // Connect to DB and fetch the account balance for the selected account
                     try (Connection conn = DriverManager.getConnection(App.db_url, App.db_user, App.db_password)) {
-                        String query = String.format("UPDATE accounts SET balance = balance - %f WHERE accountId = %d", transferAmount, selectedAccount);
-                        try (Statement stmt = conn.createStatement()) {
-                            // Store number of source rows affected
-                            sourceAffected = stmt.executeUpdate(query);
+                        String query = String.format("SELECT balance FROM accounts WHERE accountId=%d", selectedAccount);
+                        try (Statement stmt = conn.createStatement();
+                            ResultSet rs = stmt.executeQuery(query)) {
+                            while (rs.next()) {
+                                // Set the current balance variable to the current balance of the selected account
+                                currentBalance = rs.getDouble("balance");
+                            }
                         }
                     } catch (SQLException e) {
-                        // Display fail alert if SQL error occurs
-                        showTransferFail();
                         e.printStackTrace();
                     }
-                    
-                    // Connect to DB and update destination account to credit transfer amount to
-                    try (Connection conn = DriverManager.getConnection(App.db_url, App.db_user, App.db_password)) {
-                        String query = String.format("UPDATE accounts SET balance = balance + %f WHERE accountNumber = %s", transferAmount, destinationInput);
-                        try (Statement stmt = conn.createStatement()) {
-                            // Store number of destination rows affected
-                            destinationAffected = stmt.executeUpdate(query);
+
+                    // Validate that the selected account has sufficent balance to fund the transaction
+                    if(currentBalance == -1 || transferAmount > currentBalance) {
+                        // If false, clear the input field and display error alert to user
+                        transferAmountTextField.clear();
+                        showInsufficientBalance();
+                    } else {
+                        // If true, transfer the money from the selected account
+
+                        // Define variables to store the amount of source & destination rows affected
+                        int sourceAffected = 0;
+                        int destinationAffected = 0;
+
+                        // Connect to DB and update source account to debit transfer amount from
+                        try (Connection conn = DriverManager.getConnection(App.db_url, App.db_user, App.db_password)) {
+                            String query = String.format("UPDATE accounts SET balance = balance - %f WHERE accountId = %d", transferAmount, selectedAccount);
+                            try (Statement stmt = conn.createStatement()) {
+                                // Store number of source rows affected
+                                sourceAffected = stmt.executeUpdate(query);
+                            }
+                        } catch (SQLException e) {
+                            // Display fail alert if SQL error occurs
+                            showTransferFail();
+                            e.printStackTrace();
                         }
-                    } catch (SQLException e) {
-                        // Display fail alert if SQL error occurs
-                        showTransferFail();
-                        e.printStackTrace();
+
+                        // Connect to DB and update destination account to credit transfer amount to
+                        try (Connection conn = DriverManager.getConnection(App.db_url, App.db_user, App.db_password)) {
+                            String query = String.format("UPDATE accounts SET balance = balance + %f WHERE accountNumber = %s", transferAmount, destinationInput);
+                            try (Statement stmt = conn.createStatement()) {
+                                // Store number of destination rows affected
+                                destinationAffected = stmt.executeUpdate(query);
+                            }
+                        } catch (SQLException e) {
+                            // Display fail alert if SQL error occurs
+                            showTransferFail();
+                            e.printStackTrace();
+                        }
+
+                        // Check if transfer successful by validating money was debited from source and credited to destination
+                        if(sourceAffected > 0 && destinationAffected > 0)  {
+                            showTransferSuccess();
+                            App.setRoot("secondary");
+                        }
                     }
-    
-                    // Check if transfer successful by validating money was debited from source and credited to destination
-                    if(sourceAffected > 0 && destinationAffected > 0)  {
-                        showTransferSuccess();
-                        App.setRoot("secondary");
-                    }
-    
                 }
-    
             } catch (NumberFormatException e){
                 // Alert user that amount input is invalid
                 destinationAccountLabel.setText("Invalid amount!");

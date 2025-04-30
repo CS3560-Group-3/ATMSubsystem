@@ -36,7 +36,7 @@ public class depositScreenController {
 
     // Display deposit success alert to user
     private void showDepositSuccess() {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
+        Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Deposit Successful");
         alert.setHeaderText("Deposit Successful");
         alert.setContentText("The specified amount of money was deposited into your account.");
