@@ -48,6 +48,15 @@ public class App extends Application {
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
+        
+        Stage stage = (Stage) scene.getWindow();
+        
+        // The create account page is taller than the other pages
+        if (fxml.equals("createAccount")) {
+            stage.setHeight(760);
+        } else {
+            stage.setHeight(480);
+        }
     }
 
     // Define helper function to capitalize first letter in a string
